@@ -16,20 +16,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var lightRedView: UIView!
     @IBOutlet weak var lightYellowView: UIView!
     @IBOutlet weak var lightGreenView: UIView!
+    
     @IBOutlet weak var startButton: UIButton!
     
-    var presentLight = PresentLight.red
+    private var presentLight = PresentLight.red
+    private let lightIsOn: CGFloat = 1
+    private let lightIsOff: CGFloat = 0.3
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        lightRedView.alpha = 0.3
-        lightYellowView.alpha = 0.3
-        lightGreenView.alpha = 0.3
+        lightRedView.alpha = lightIsOff
+        lightYellowView.alpha = lightIsOff
+        lightGreenView.alpha = lightIsOff
         
-        lightRedView.layer.cornerRadius = 73
-        lightYellowView.layer.cornerRadius = 73
-        lightGreenView.layer.cornerRadius = 73
+        lightRedView.layer.cornerRadius = lightRedView.frame.width / 2
+        lightYellowView.layer.cornerRadius = lightYellowView.frame.width / 2
+        lightGreenView.layer.cornerRadius = lightGreenView.frame.width / 2
         startButton.layer.cornerRadius = 10
     }
 
@@ -40,18 +43,18 @@ class ViewController: UIViewController {
         switch presentLight {
             
         case .red:
-            lightRedView.alpha = 1
-            lightGreenView.alpha = 0.3
+            lightRedView.alpha = lightIsOn
+            lightGreenView.alpha = lightIsOff
             presentLight = .yellow
             
         case .yellow:
-            lightYellowView.alpha = 1
-            lightRedView.alpha = 0.3
+            lightYellowView.alpha = lightIsOn
+            lightRedView.alpha = lightIsOff
             presentLight = .green
             
         case .green:
-            lightGreenView.alpha = 1
-            lightYellowView.alpha = 0.3
+            lightGreenView.alpha = lightIsOn
+            lightYellowView.alpha = lightIsOff
             presentLight = .red
         }
     }
